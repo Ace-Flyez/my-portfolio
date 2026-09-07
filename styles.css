@@ -1,0 +1,512 @@
+/* =========================
+   DESIGN TOKENS
+========================= */
+
+:root {
+    --bg: #f3f6fb;
+
+    --text: #2d3748;
+    --muted: #4a5568;
+
+    --primary: #3182ce;
+    --primary-dark: #2b6cb0;
+
+    --accent: #fcd34d;
+    --accent-hover: #fbbf24;
+
+    --white: #ffffff;
+
+    --radius: 1rem;
+
+    --shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
+    --shadow-accent: 0 10px 25px rgba(252, 211, 77, 0.18);
+
+    --transition: 0.3s ease;
+}
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    background-color: var(--bg);
+
+    background-image:
+        radial-gradient(
+            circle at top left,
+            rgba(252, 211, 77, 0.08),
+            transparent 20%
+        );
+
+    color: var(--text);
+
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+    line-height: 1.7;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+
+.container {
+    width: min(90%, 1100px);
+    margin-inline: auto;
+}
+
+.section {
+    padding: 4rem 0;
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+h1,
+h2 {
+    color: #1a202c;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: clamp(2.4rem, 5vw, 3.7rem);
+
+    text-align: center;
+
+    margin-bottom: 1.2rem;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+}
+
+h2 {
+    font-size: 1.8rem;
+
+    margin-bottom: 1rem;
+
+    position: relative;
+
+    padding-left: 1rem;
+}
+
+h2::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 5px;
+
+    width: 4px;
+    height: 80%;
+
+    background: linear-gradient(
+        180deg,
+        var(--accent),
+        var(--accent-hover)
+    );
+
+    border-radius: 999px;
+}
+
+p {
+    color: var(--muted);
+    margin-bottom: 1rem;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navbar {
+    padding: 1.5rem 0;
+}
+
+.nav-links {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 2rem;
+
+    list-style: none;
+
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    text-decoration: none;
+
+    color: var(--primary);
+
+    font-weight: 600;
+
+    transition: var(--transition);
+
+    position: relative;
+
+    padding-bottom: 0.2rem;
+}
+
+.nav-links a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -6px;
+
+    width: 0%;
+    height: 3px;
+
+    background: var(--accent);
+
+    border-radius: 999px;
+
+    transition: var(--transition);
+}
+
+.nav-links a:hover {
+    color: var(--primary-dark);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    padding: 3rem 0 2rem;
+    text-align: center;
+}
+
+/* =========================
+   DISPLAY IMAGE
+========================= */
+
+.display-image {
+    margin-bottom: 1.5rem;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+.display-image img {
+    width: 145px;
+    height: 145px;
+
+    object-fit: contain;
+
+    border-radius: 50%;
+
+    background: white;
+
+    padding: 10px;
+
+    border: 4px solid rgba(252, 211, 77, 0.3);
+
+    box-shadow: var(--shadow);
+
+    transition: var(--transition);
+}
+
+.display-image img:hover {
+    transform: translateY(-5px);
+
+    box-shadow: var(--shadow-accent);
+}
+
+/* =========================
+   CARD SYSTEM
+========================= */
+
+.card {
+    background: var(--white);
+
+    padding: 2rem;
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition: var(--transition);
+}
+
+.card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background: linear-gradient(
+        90deg,
+        var(--accent),
+        #ffe082
+    );
+}
+
+.card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: var(--shadow-accent);
+}
+
+.card + .card {
+    margin-top: 2rem;
+}
+
+/* =========================
+   TESTIMONIALS
+========================= */
+
+.testimonial {
+    position: relative;
+
+    padding-left: 1.5rem;
+
+    margin-top: 2.2rem;
+
+    border-left: 4px solid var(--accent);
+}
+
+.testimonial::before {
+    content: "“";
+
+    position: absolute;
+
+    left: 10px;
+    top: -20px;
+
+    font-size: 4rem;
+
+    color: var(--accent);
+
+    opacity: 0.18;
+
+    font-family: Georgia, serif;
+}
+
+.testimonial p {
+    font-style: italic;
+
+    font-size: 1.06rem;
+
+    color: #3b4758;
+
+    margin-bottom: 0.8rem;
+}
+
+.testimonial-author {
+    color: var(--primary-dark);
+
+    font-weight: 700;
+
+    font-size: 1rem;
+
+    letter-spacing: 0.2px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.button-group {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 1.2rem;
+
+    flex-wrap: wrap;
+
+    margin-top: 2rem;
+
+    padding-bottom: 3rem;
+}
+
+.btn {
+    background: linear-gradient(
+        135deg,
+        var(--accent),
+        var(--accent-hover)
+    );
+
+    color: #1a202c;
+
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+
+    padding: 0.95rem 1.5rem;
+
+    text-decoration: none;
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow-accent);
+
+    transition: var(--transition);
+
+    display: inline-block;
+
+    border: none;
+
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: translateY(-4px) scale(1.02);
+
+    filter: brightness(1.03);
+}
+
+/* =========================
+   FORMS
+========================= */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input,
+textarea {
+    padding: 0.95rem;
+
+    border: 1px solid #d9dee7;
+
+    border-radius: 0.75rem;
+
+    font-size: 1rem;
+
+    outline: none;
+
+    transition: var(--transition);
+
+    background: white;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--accent);
+
+    box-shadow:
+        0 0 0 4px rgba(252, 211, 77, 0.2);
+}
+
+/* =========================
+   IMAGES
+========================= */
+
+.image-row {
+    display: flex;
+
+    gap: 1rem;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    margin-top: 1.5rem;
+}
+
+.image-row img,
+.card img {
+    width: 100%;
+
+    max-width: 300px;
+
+    border-radius: 1rem;
+
+    object-fit: cover;
+
+    box-shadow: var(--shadow);
+
+    transition: var(--transition);
+}
+
+.image-row img:hover,
+.card img:hover {
+    transform: scale(1.02);
+
+    box-shadow: var(--shadow-accent);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+footer p {
+    margin-bottom: 0;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    h1 {
+        font-size: 2.3rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+
+    .display-image img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .testimonial::before {
+        font-size: 3rem;
+    }
+}
