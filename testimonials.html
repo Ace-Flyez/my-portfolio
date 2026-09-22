@@ -3,87 +3,258 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Testimonials | Flyez</title>
-  <meta name="description" content="Read testimonials from clients and collaborators who have worked with Flyez on creative design projects.">
+
+  <title>Reviews | Flyez</title>
+  <meta
+    name="description"
+    content="What clients and collaborators say about working with Flyez on creative design projects."
+  >
+
   <link rel="canonical" href="https://ace-flyez.github.io/my-portfolio/testimonials.html">
   <link rel="icon" href="site-assets/favicon.png" type="image/png">
+
+  <meta property="og:title" content="Reviews | Flyez">
+  <meta
+    property="og:description"
+    content="What clients and collaborators say about working with Flyez."
+  >
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ace-flyez.github.io/my-portfolio/testimonials.html">
-  <meta property="og:title" content="Client Reviews | Flyez">
-  <meta property="og:description" content="See what clients and collaborators say about working with Flyez.">
   <meta property="og:image" content="https://ace-flyez.github.io/my-portfolio/site-assets/social-preview.png">
-  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
 
 <body>
-  <nav class="navbar">
-    <div class="container nav-content">
+
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Main navigation">
+
       <a class="brand" href="index.html" aria-label="Flyez home">
-        <img src="optimized-images/Flyez New Logo.png" alt="">
-        <span>Flyez</span>
+        FLYEZ<span>.</span>
       </a>
 
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
-        <span class="visually-hidden">Toggle navigation</span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+        aria-label="Open navigation"
+      >
+        <span></span>
+        <span></span>
       </button>
 
-      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+      <div class="nav-links" id="primary-navigation">
+        <a href="work.html">Work</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a class="active" href="testimonials.html" aria-current="page">Reviews</a>
+        <a class="nav-cta" href="contact.html">Start a Project</a>
+      </div>
+
+      <button
+        class="theme-toggle"
+        type="button"
+        aria-pressed="false"
+        aria-label="Switch theme"
+      >
         <svg class="theme-icon icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 15.6A9 9 0 0 1 8.4 3.2 9 9 0 1 0 20.8 15.6Z"/></svg>
         <svg class="theme-icon icon-sun" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0-16v2m0 16v2m10-10h-2M4 12H2m17.1-7.1-1.4 1.4M6.3 17.7l-1.4 1.4m14.2 0-1.4-1.4M6.3 6.3 4.9 4.9"/></svg>
       </button>
 
-      <ul class="nav-links" id="primary-navigation">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">Learn More</a></li>
-        <li><a href="services.html">View My Work</a></li>
-        <li><a href="testimonials.html" aria-current="page">Reviews</a></li>
-        <li><a href="contact.html">Get in Touch</a></li>
-      </ul>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
   <main>
-    <header class="page-header">
+
+    <!-- PAGE INTRO -->
+    <section class="reviews-hero section">
       <div class="container">
-        <h1>What People Are Saying</h1>
-        <p>Here are some testimonials from clients and collaborators who have worked with me.</p>
-      </div>
-    </header>
 
-    <section class="section">
-      <div class="container">
-        <article class="card testimonial">
-          <p>His designs are always fresh and bold&mdash;exactly what my brand needed to stand out!</p>
-          <p class="testimonial-author">Evans A., Brand Owner</p>
-        </article>
+        <p class="eyebrow">CLIENT FEEDBACK</p>
 
-        <article class="card testimonial">
-          <p>One of the few designers who understands both aesthetics and purpose. Highly recommended.</p>
-          <p class="testimonial-author">Regina N., Social Media Manager</p>
-        </article>
+        <h1>
+          Good work gets noticed.
+          <span>Good collaboration gets remembered.</span>
+        </h1>
 
-        <article class="card testimonial">
-          <p>Reliable, talented, and truly original. You do not get the usual clich&eacute; stuff with him.</p>
-          <p class="testimonial-author">Praise A., Small Business Owner</p>
-        </article>
+        <p class="reviews-hero-copy">
+          A few words from people I've worked with across design,
+          branding, and social media projects.
+        </p>
+
       </div>
     </section>
+
+
+    <!-- TESTIMONIALS -->
+    <section class="reviews-list section">
+      <div class="container">
+
+        <article class="review-item">
+
+          <div class="review-number">01</div>
+
+          <div class="review-content">
+
+            <blockquote>
+              “His designs are always fresh and bold, exactly what my
+              brand needed to stand out!”
+            </blockquote>
+
+            <div class="review-author">
+              <strong>Evans A.</strong>
+              <span>Brand Owner</span>
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article class="review-item">
+
+          <div class="review-number">02</div>
+
+          <div class="review-content">
+
+            <blockquote>
+              “One of the few designers who understands both aesthetics
+              and purpose. Highly recommended.”
+            </blockquote>
+
+            <div class="review-author">
+              <strong>Regina N.</strong>
+              <span>Social Media Manager</span>
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article class="review-item">
+
+          <div class="review-number">03</div>
+
+          <div class="review-content">
+
+            <blockquote>
+              “Reliable, talented, and truly original. You do not get
+              the usual cliché stuff with him.”
+            </blockquote>
+
+            <div class="review-author">
+              <strong>Praise A.</strong>
+              <span>Small Business Owner</span>
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- REASSURANCE -->
+    <section class="reviews-note section">
+      <div class="container">
+
+        <div class="reviews-note-grid">
+
+          <p class="eyebrow">THE APPROACH</p>
+
+          <div>
+            <h2>
+              Design is only part of the job.
+            </h2>
+
+            <p>
+              Understanding the brief, asking the right questions,
+              communicating clearly, and delivering something that
+              actually serves the brand matter just as much.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- CTA -->
+    <section class="reviews-cta section">
+      <div class="container">
+
+        <p class="eyebrow">YOUR PROJECT</p>
+
+        <h2>
+          Ready to make something
+          <span>worth talking about?</span>
+        </h2>
+
+        <a class="button button-primary" href="contact.html">
+          Start a Project
+        </a>
+
+      </div>
+    </section>
+
   </main>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 Flyez. Built with creativity and code.</p>
-      <div class="social-links">
-        <a href="https://www.instagram.com/flyez_designs/" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm11 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg><span>Instagram</span></a>
-        <a href="https://x.com/ace_flyezzz" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23 22h-6.1l-4.8-6.2L6.7 22H3.6l7.3-8.4L1.5 2h6.2l4.3 5.7L18.9 2Zm-1.1 18h1.7L6.8 3.9H5L17.8 20Z"/></svg><span>X</span></a>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+
+      <div>
+        <a class="brand" href="index.html">
+          FLYEZ<span>.</span>
+        </a>
+
+        <p>
+          Visual design, brand systems, campaigns,
+          and digital experiences.
+        </p>
       </div>
-      <a class="footer-link" href="contact.html">Let's work together</a>
+
+      <div class="footer-links">
+        <div>
+          <span class="footer-label">EXPLORE</span>
+          <a href="work.html">Work</a>
+          <a href="services.html">Services</a>
+          <a href="about.html">About</a>
+          <a href="testimonials.html">Reviews</a>
+        </div>
+
+        <div>
+          <span class="footer-label">CONNECT</span>
+          <a href="contact.html">Start a Project</a>
+          <a
+            href="https://www.instagram.com/flyez_designs/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram
+          </a>
+          <a
+            href="https://x.com/ace_flyezzz"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            X
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <span>© 2026 Flyez.</span>
+      <span>Built with creativity and code.</span>
     </div>
   </footer>
+
 </body>
 </html>
