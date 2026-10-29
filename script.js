@@ -1,8 +1,7 @@
 const themeToggle = document.querySelector(".theme-toggle");
 const savedTheme = localStorage.getItem("theme");
-const prefersDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-const setTheme = (theme) => {
+function setTheme(theme) {
   document.documentElement.dataset.theme = theme;
   localStorage.setItem("theme", theme);
 
@@ -11,110 +10,27 @@ const setTheme = (theme) => {
     themeToggle.setAttribute("aria-pressed", String(isDark));
     themeToggle.setAttribute("aria-label", `Switch to ${isDark ? "light" : "dark"} theme`);
   }
-};
+}
 
-// The portfolio's signature presentation is its dark studio palette. Visitors
-// can still switch themes, and a previous preference always wins.
 setTheme(savedTheme || "dark");
-
-// Both the simple navbar pages and case-study header pages share this scroll
-// state, so the navigation remains available with a stronger glass surface.
-const pageHeaders = document.querySelectorAll(".navbar, .site-header");
-const updateHeaderGlass = () => {
-  const isScrolled = window.scrollY > 8;
-  pageHeaders.forEach((header) => header.classList.toggle("is-scrolled", isScrolled));
-};
-updateHeaderGlass();
-window.addEventListener("scroll", updateHeaderGlass, { passive: true });
 
 themeToggle?.addEventListener("click", () => {
   const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
   setTheme(nextTheme);
 });
 
-// A single footer avoids visual drift between pages created at different times.
-const instagramIcon = '<svg class="footer-social-icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"></circle></svg>';
-const xIcon = '<svg class="footer-social-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"></path></svg>';
-
-document.querySelectorAll("footer").forEach((footer) => {
-  footer.classList.add("site-footer");
-  footer.innerHTML = `
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <a class="brand" href="index.html">FLYEZ<span>.</span></a>
-        <p>Visual design, brand systems, campaigns, and digital experiences.</p>
-      </div>
-      <div class="footer-links">
-        <div class="footer-link-group">
-          <span class="footer-label">Explore</span>
-          <a href="work.html">Work</a>
-          <a href="services.html">Services</a>
-          <a href="about.html">About</a>
-          <a href="testimonials.html">Reviews</a>
-        </div>
-        <div class="footer-link-group">
-          <span class="footer-label">Connect</span>
-          <a href="contact.html">Start a Project</a>
-          <a href="https://www.instagram.com/flyez_designs/" target="_blank" rel="noopener noreferrer">${instagramIcon}<span>Instagram</span></a>
-          <a href="https://x.com/ace_flyezzz" target="_blank" rel="noopener noreferrer">${xIcon}<span>X</span></a>
-        </div>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <p>&copy; 2026 Flyez.</p>
-      <span>Built with creativity and code.</span>
-    </div>`;
-});
-
-// Older pages have slightly different footer markup. Add the same inline
-// icons at runtime so Instagram and X are consistent everywhere.
-const socialIcons = {
-  instagram: '<svg class="footer-social-icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"></circle></svg>',
-  x: '<svg class="footer-social-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"></path></svg>',
+const pageHeaders = document.querySelectorAll(".navbar, .site-header");
+const updateHeader = () => {
+  const isScrolled = window.scrollY > 8;
+  pageHeaders.forEach((header) => header.classList.toggle("is-scrolled", isScrolled));
 };
 
-document.querySelectorAll('footer a[href*="instagram"], footer a[href*="x.com"]').forEach((link) => {
-  if (link.querySelector("svg")) return;
-  const icon = link.href.includes("instagram") ? socialIcons.instagram : socialIcons.x;
-  link.insertAdjacentHTML("afterbegin", icon);
-});
+updateHeader();
+window.addEventListener("scroll", updateHeader, { passive: true });
 
-const contactForm = document.querySelector(".contact-form");
-
-contactForm?.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  const submitButton = contactForm.querySelector('button[type="submit"]');
-  const status = contactForm.querySelector(".form-status");
-  const defaultLabel = submitButton.textContent;
-
-  submitButton.disabled = true;
-  submitButton.textContent = "Sending...";
-  status.textContent = "Sending your message...";
-  status.classList.remove("is-error");
-
-  try {
-    const response = await fetch(contactForm.action, {
-      method: contactForm.method,
-      body: new FormData(contactForm),
-      headers: { Accept: "application/json" },
-    });
-
-    if (!response.ok) throw new Error("Form submission failed");
-
-    window.location.assign("thankyou.html");
-  } catch (error) {
-    status.textContent = "Your message could not be sent. Please try again or reach out through social media.";
-    status.classList.add("is-error");
-    submitButton.disabled = false;
-    submitButton.textContent = defaultLabel;
-  }
-});
-
-document.querySelectorAll(".navbar").forEach((navbar) => {
-  const toggle = navbar.querySelector(".nav-toggle");
-  const links = navbar.querySelector(".nav-links");
-
+document.querySelectorAll(".navbar").forEach((navHost) => {
+  const toggle = navHost.querySelector(".nav-toggle");
+  const links = navHost.querySelector(".nav-links");
   if (!toggle || !links) return;
 
   const closeMenu = () => {
@@ -135,4 +51,104 @@ document.querySelectorAll(".navbar").forEach((navbar) => {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeMenu();
   });
+});
+
+const rotatingLine = document.querySelector(".hero-rotator");
+
+if (rotatingLine) {
+  const phrases = ["brand unforgettable.", "website unmistakable.", "workflow effortless."];
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let phraseIndex = 0;
+  let characterIndex = 0;
+  let deleting = false;
+
+  const typeLoop = () => {
+    const phrase = phrases[phraseIndex];
+    rotatingLine.textContent = phrase.slice(0, characterIndex);
+
+    if (!deleting && characterIndex === phrase.length) {
+      deleting = true;
+      window.setTimeout(typeLoop, 850);
+      return;
+    }
+
+    if (deleting && characterIndex === 0) {
+      deleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      window.setTimeout(typeLoop, 170);
+      return;
+    }
+
+    characterIndex += deleting ? -1 : 1;
+    window.setTimeout(typeLoop, deleting ? 28 : 52);
+  };
+
+  if (reducedMotion) {
+    rotatingLine.textContent = phrases[0];
+  } else {
+    typeLoop();
+  }
+}
+
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const revealTargets = document.querySelectorAll("main > section");
+
+if (!reducedMotion && "IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  revealTargets.forEach((section) => {
+    section.classList.add("reveal-on-scroll");
+    revealObserver.observe(section);
+  });
+}
+
+const contactForm = document.querySelector(".contact-form");
+
+contactForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  if (!contactForm.checkValidity()) {
+    const missing = [...contactForm.querySelectorAll("[required]")]
+      .filter((field) => !field.value.trim())
+      .map((field) => field.labels?.[0]?.textContent || field.name);
+    const status = contactForm.querySelector(".form-status");
+    status.textContent = `Please complete: ${missing.join(", ")}.`;
+    status.classList.add("is-error");
+    contactForm.reportValidity();
+    return;
+  }
+
+  const submitButton = contactForm.querySelector('button[type="submit"]');
+  const status = contactForm.querySelector(".form-status");
+  const defaultLabel = submitButton.textContent;
+
+  submitButton.disabled = true;
+  submitButton.textContent = "Sending…";
+  status.textContent = "Sending your message…";
+  status.classList.remove("is-error");
+
+  try {
+    const response = await fetch(contactForm.action, {
+      method: contactForm.method,
+      body: new FormData(contactForm),
+      headers: { Accept: "application/json" },
+    });
+
+    if (!response.ok) throw new Error("Form submission failed");
+    window.location.assign("thankyou.html");
+  } catch {
+    status.textContent = "Your message could not be sent. Please try again or reach out through social media.";
+    status.classList.add("is-error");
+    submitButton.disabled = false;
+    submitButton.textContent = defaultLabel;
+  }
 });
