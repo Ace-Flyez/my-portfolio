@@ -56,21 +56,37 @@ document.querySelectorAll(".navbar").forEach((navHost) => {
 const rotatingLine = document.querySelector(".hero-rotator");
 
 if (rotatingLine) {
-  const phrases = ["yours.", "bold.", "clear."];
+  const phrases = ["branded.", "web systems.", "workflows."];
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let phraseIndex = 0;
+  let characterIndex = 0;
+  let deleting = false;
+
+  const typeLoop = () => {
+    const phrase = phrases[phraseIndex];
+    rotatingLine.textContent = phrase.slice(0, characterIndex);
+
+    if (!deleting && characterIndex === phrase.length) {
+      deleting = true;
+      window.setTimeout(typeLoop, 650);
+      return;
+    }
+
+    if (deleting && characterIndex === 0) {
+      deleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      window.setTimeout(typeLoop, 120);
+      return;
+    }
+
+    characterIndex += deleting ? -1 : 1;
+    window.setTimeout(typeLoop, deleting ? 24 : 42);
+  };
 
   if (reducedMotion) {
     rotatingLine.textContent = phrases[0];
   } else {
-    window.setInterval(() => {
-      rotatingLine.classList.add("is-changing");
-      window.setTimeout(() => {
-        phraseIndex = (phraseIndex + 1) % phrases.length;
-        rotatingLine.textContent = phrases[phraseIndex];
-        rotatingLine.classList.remove("is-changing");
-      }, 170);
-    }, 2400);
+    typeLoop();
   }
 }
 
