@@ -1,5 +1,8 @@
 const themeToggle = document.querySelector(".theme-toggle");
 const savedTheme = localStorage.getItem("theme");
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
 
 function setTheme(theme) {
   document.documentElement.dataset.theme = theme;
@@ -8,21 +11,27 @@ function setTheme(theme) {
   if (themeToggle) {
     const isDark = theme === "dark";
     themeToggle.setAttribute("aria-pressed", String(isDark));
-    themeToggle.setAttribute("aria-label", `Switch to ${isDark ? "light" : "dark"} theme`);
+    themeToggle.setAttribute(
+      "aria-label",
+      `Switch to ${isDark ? "light" : "dark"} theme`,
+    );
   }
 }
 
 setTheme(savedTheme || "dark");
 
 themeToggle?.addEventListener("click", () => {
-  const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  const nextTheme =
+    document.documentElement.dataset.theme === "dark" ? "light" : "dark";
   setTheme(nextTheme);
 });
 
 const pageHeaders = document.querySelectorAll(".navbar, .site-header");
 const updateHeader = () => {
   const isScrolled = window.scrollY > 8;
-  pageHeaders.forEach((header) => header.classList.toggle("is-scrolled", isScrolled));
+  pageHeaders.forEach((header) =>
+    header.classList.toggle("is-scrolled", isScrolled),
+  );
 };
 
 updateHeader();
@@ -57,7 +66,6 @@ const rotatingLine = document.querySelector(".hero-rotator");
 
 if (rotatingLine) {
   const phrases = ["branded.", "web systems.", "workflows."];
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let phraseIndex = 0;
   let characterIndex = 0;
   let deleting = false;
@@ -83,17 +91,16 @@ if (rotatingLine) {
     window.setTimeout(typeLoop, deleting ? 24 : 42);
   };
 
-  if (reducedMotion) {
+  if (prefersReducedMotion) {
     rotatingLine.textContent = phrases[0];
   } else {
     typeLoop();
   }
 }
 
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const revealTargets = document.querySelectorAll("main > section");
 
-if (!reducedMotion && "IntersectionObserver" in window) {
+if (!prefersReducedMotion && "IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
@@ -102,7 +109,7 @@ if (!reducedMotion && "IntersectionObserver" in window) {
         observer.unobserve(entry.target);
       });
     },
-    { threshold: 0.12 }
+    { threshold: 0.12 },
   );
 
   revealTargets.forEach((section) => {
@@ -146,7 +153,8 @@ contactForm?.addEventListener("submit", async (event) => {
     if (!response.ok) throw new Error("Form submission failed");
     window.location.assign("thankyou.html");
   } catch {
-    status.textContent = "Your message could not be sent. Please try again or reach out through social media.";
+    status.textContent =
+      "Your message could not be sent. Please try again or reach out through social media.";
     status.classList.add("is-error");
     submitButton.disabled = false;
     submitButton.textContent = defaultLabel;
